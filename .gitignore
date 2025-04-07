@@ -16,7 +16,6 @@ docker/.cache/
 *.a
 *.so
 build/
-bin/
 
 # === OS / Editor ===
 .DS_Store
