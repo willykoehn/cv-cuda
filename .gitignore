@@ -1,0 +1,32 @@
+# === CDK infra ===
+infra/node_modules/
+infra/cdk.out/
+infra/package-lock.json
+infra/test/
+infra/cdk.context.json
+
+# === Docker ===
+docker/.cache/
+*.log
+
+# === C++ build artifacts ===
+*.o
+*.out
+*.exe
+*.a
+*.so
+build/
+bin/
+
+# === OS / Editor ===
+.DS_Store
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# === General JS/TS ===
+*.js
+*.d.ts
+dist/
+
