@@ -53,6 +53,8 @@ export class CvCudaStack extends Stack {
       securityGroup: sg,
       keyName,
       userData,
+      vpcSubnets: { subnetType: ec2.SubnetType.PUBLIC }, // 👈 forces public subnet
+      associatePublicIpAddress: true, // 👈 critical line
     });
   }
 }
