@@ -5,8 +5,13 @@ import { Construct } from 'constructs';
 import * as path from 'path';
 import * as fs from 'fs';
 
+interface CvCudaStackProps extends StackProps {
+  region: string;
+  amiId: string;
+}
+
 export class CvCudaStack extends Stack {
-  constructor(scope: Construct, id: string, props?: StackProps) {
+  constructor(scope: Construct, id: string, props: CvCudaStackProps) {
     super(scope, id, props);
 
     // Get key name from env var
@@ -29,9 +34,9 @@ export class CvCudaStack extends Stack {
     sg.addIngressRule(ec2.Peer.anyIpv4(), ec2.Port.tcp(22), 'Allow SSH access');
     sg.addIngressRule(ec2.Peer.anyIpv4(), ec2.Port.tcp(80), 'Allow HTTP access');
 
-    // Deep Learning AMI with CUDA (Sydney region)
+    // Deep Learning AMI with CUDA
     const ami = ec2.MachineImage.genericLinux({
-      'ap-southeast-2': 'ami-0d17f9bbc0c5e254c', // Deep Learning AMI (CUDA 12.1, NVIDIA 535, Ubuntu 20.04)
+      [props.region]: props.amiId,
     });
 
     // Load setup.sh from scripts dir
@@ -48,10 +53,6 @@ export class CvCudaStack extends Stack {
       securityGroup: sg,
       keyName,
       userData,
-    });
-
-    new cdk.CfnOutput(this, 'InstancePublicIP', {
-      value: instance.instancePublicIp,
     });
   }
 }
