@@ -2,6 +2,8 @@
 import * as cdk from 'aws-cdk-lib';
 import { CvCudaStack } from '../lib/cv-cuda-stack';
 
+import 'dotenv/config';
+
 const app = new cdk.App();
 new CvCudaStack(app, 'CvCudaStack', {
   /* If you don't specify 'env', this stack will be environment-agnostic.
