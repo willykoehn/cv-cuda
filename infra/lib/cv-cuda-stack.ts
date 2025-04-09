@@ -17,7 +17,7 @@ export class CvCudaStack extends Stack {
     // Get key name from env var
     const keyName = process.env.EC2_KEY_NAME;
     if (!keyName) {
-      throw new Error("❌ You must set the EC2_KEY_NAME environment variable before deploying.");
+      throw new Error("You must set the EC2_KEY_NAME environment variable before deploying.");
     }
 
     // VPC
@@ -53,8 +53,8 @@ export class CvCudaStack extends Stack {
       securityGroup: sg,
       keyName,
       userData,
-      vpcSubnets: { subnetType: ec2.SubnetType.PUBLIC }, // 👈 forces public subnet
-      associatePublicIpAddress: true, // 👈 critical line
+      vpcSubnets: { subnetType: ec2.SubnetType.PUBLIC }, // forces public subnet
+      associatePublicIpAddress: true,
     });
   }
 }
