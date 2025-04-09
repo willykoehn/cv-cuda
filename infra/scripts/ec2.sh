@@ -69,10 +69,15 @@ deploy_and_ssh() {
   sync_code && ssh_ec2
 }
 
+stop_self() {
+  echo "[INFO] Requesting EC2 instance to shut itself down..."
+  sudo shutdown -h now
+}
+
 # === Entry point ===
 
 if [[ $# -eq 0 ]]; then
-  echo "Usage: $0 {get_ip|get_instance_id|start_instance|stop_instance|ssh_ec2|sync_code|deploy_and_ssh}"
+  echo "Usage: $0 {get_ip|get_instance_id|start_instance|stop_instance|ssh_ec2|sync_code|deploy_and_ssh|stop_self}"
   exit 1
 fi
 
